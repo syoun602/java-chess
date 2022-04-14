@@ -1,4 +1,4 @@
-package chess.position;
+package chess.square;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,7 +21,7 @@ class FileTest {
     @DisplayName("숫자로 자신의 파일를 반환한다.")
     @ParameterizedTest
     @CsvSource({"A,a", "B,b", "C,c", "D,d", "E,e", "F,f", "G,g", "H,h"})
-    void of(final String name, final String value) {
+    void from(final String name, final String value) {
         File file = File.from(value);
         File enumName = File.valueOf(name);
         assertThat(file).isSameAs(enumName);

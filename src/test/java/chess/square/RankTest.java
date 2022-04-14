@@ -1,4 +1,4 @@
-package chess.position;
+package chess.square;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,7 +21,7 @@ class RankTest {
     @DisplayName("숫자로 자신의 랭크를 반환한다.")
     @ParameterizedTest
     @CsvSource({"ONE,1", "TWO,2", "THREE,3", "FOUR,4", "FIVE,5", "SIX,6", "SEVEN,7", "EIGHT,8"})
-    void of(final String name, final int value) {
+    void from(final String name, final int value) {
         Rank rank = Rank.from(value);
         Rank enumName = Rank.valueOf(name);
         assertThat(rank).isSameAs(enumName);
