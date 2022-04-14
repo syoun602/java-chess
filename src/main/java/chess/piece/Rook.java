@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Rook extends MultipleMovePiece {
 
-    protected Rook(final Team team, final Square square) {
+    public Rook(final Team team, final Square square) {
         super(team, square);
     }
 

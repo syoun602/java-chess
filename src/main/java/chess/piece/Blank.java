@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Blank extends Piece {
 
-    private Blank(final Team team, final Square square) {
+    public Blank(final Team team, final Square square) {
         super(team, square);
         validateTeam(team);
     }
