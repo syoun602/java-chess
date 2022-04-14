@@ -2,7 +2,9 @@ package chess.piece.detail;
 
 import static chess.piece.detail.Direction.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import chess.square.Square;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -73,5 +75,29 @@ class DirectionTest {
     void getYDegree(final String rawDirection, final int yDegree) {
         Direction direction = Direction.valueOf(rawDirection);
         assertThat(direction.getYDegree()).isEqualTo(yDegree);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "a1,a3,N", "a1,c3,NE", "a1,c1,E", "a3,c1,SE",
+            "a3,a1,S", "c3,a1,SW", "c3,a3,W", "c1,a3,NW"
+    })
+    void findDirection(final String rawFrom, final String rawTo, final String rawDirection) {
+        final Square from = Square.from(rawFrom);
+        final Square to = Square.from(rawTo);
+        final Direction direction = Direction.valueOf(rawDirection);
+
+        assertThat(Direction.findDirection(from, to)).isSameAs(direction);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"c4,e3", "c4,a1", "c4,h8", "a1,h2", "a1,b8"})
+    void invalidDirectionException(final String rawFrom, final String rawTo) {
+        final Square from = Square.from(rawFrom);
+        final Square to = Square.from(rawTo);
+
+        assertThatThrownBy(() -> Direction.findDirection(from, to))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("해당 위치로의 방향을 찾을 수 없습니다.");
     }
 }

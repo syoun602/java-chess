@@ -58,8 +58,25 @@ public class Square {
         return Square.of(file, rank);
     }
 
+    public Square next(final Direction direction, final int count) {
+        final File file = this.file.add(direction.getXDegree() * count);
+        final Rank rank = this.rank.add(direction.getYDegree() * count);
+
+        return Square.of(file, rank);
+    }
+
+    public int calculateDistance(final Square to) {
+        final int fileDifference = Math.abs(this.file.getValue() - to.file.getValue());
+        final int rankDifference = Math.abs(this.rank.getValue() - to.rank.getValue());
+        return Math.max(fileDifference, rankDifference);
+    }
+
     public boolean isExist(final Direction direction) {
         return file.isAddable(direction.getXDegree()) && rank.isAddable(direction.getYDegree());
+    }
+
+    public boolean isExist(final Direction direction, final int count) {
+        return file.isAddable(direction.getXDegree() * count) && rank.isAddable(direction.getYDegree() * count);
     }
 
     @Override

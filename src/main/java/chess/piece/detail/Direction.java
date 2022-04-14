@@ -1,7 +1,8 @@
 package chess.piece.detail;
 
-
+import chess.square.Square;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public enum Direction {
 
@@ -54,6 +55,22 @@ public enum Direction {
 
     public static List<Direction> getKnightDirections() {
         return List.of(NNE, ENE, ESE, SSE, SSW, WSW, WNW, NNW);
+    }
+
+    public static Direction findDirection(final Square from, final Square to) {
+        List<Direction> directions = getEveryDirections();
+        return directions.stream()
+                .filter(direction -> isInDirections(from, to, direction))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("해당 위치로의 방향을 찾을 수 없습니다."));
+    }
+
+    private static boolean isInDirections(final Square from, final Square to, final Direction direction) {
+        int distance = from.calculateDistance(to);
+        return IntStream.rangeClosed(1, distance)
+                .filter(index -> from.isExist(direction, index))
+                .mapToObj(index -> from.next(direction, index))
+                .anyMatch(square -> square.equals(to));
     }
 
     public int getXDegree() {
