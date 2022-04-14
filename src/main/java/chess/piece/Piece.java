@@ -15,6 +15,13 @@ public abstract class Piece {
         this.square = square;
     }
 
+    public void updateSquare(final Square to) {
+        if (!canMove(to)) {
+            throw new IllegalArgumentException("해당 기물이 이동할 수 없는 위치입니다.");
+        }
+        square = to;
+    }
+
     abstract boolean canMove(final Square to);
 
     abstract List<Direction> getAvailableDirections();
