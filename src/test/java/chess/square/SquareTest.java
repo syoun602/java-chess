@@ -1,6 +1,8 @@
 package chess.square;
 
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,14 +17,14 @@ class SquareTest {
         Square square1 = Square.from(rawSquare);
         Square square2 = new Square(File.valueOf(rawFile), Rank.valueOf(rawRank));
 
-        Assertions.assertThat(square1).isEqualTo(square2);
+        assertThat(square1).isEqualTo(square2);
     }
 
     @DisplayName("길이가 2가 아닌 문자열로 스퀘어를 생성하려 할 시 예외가 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {"sun", "s"})
     void invalidLengthException(final String rawSquare) {
-        Assertions.assertThatThrownBy(() -> Square.from(rawSquare))
+        assertThatThrownBy(() -> Square.from(rawSquare))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("스퀘어의 길이가 올바르지 않습니다.");
     }
@@ -31,7 +33,7 @@ class SquareTest {
     @ParameterizedTest
     @ValueSource(strings = {"a0", "z1", "h9", "i8"})
     void notExistException(final String rawSquare) {
-        Assertions.assertThatThrownBy(() -> Square.from(rawSquare))
+        assertThatThrownBy(() -> Square.from(rawSquare))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("존재하지 않는 스퀘어입니다.");
     }

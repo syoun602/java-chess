@@ -1,8 +1,8 @@
 package chess.square;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -31,7 +31,7 @@ class RankTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 9})
     void invalidRankException(final int value) {
-        Assertions.assertThatThrownBy(() -> Rank.from(value))
+        assertThatThrownBy(() -> Rank.from(value))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("존재하지 않는 랭크입니다.");
     }
