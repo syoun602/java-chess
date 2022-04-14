@@ -3,7 +3,9 @@ package chess.square;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import chess.piece.detail.Direction;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -36,5 +38,14 @@ class SquareTest {
         assertThatThrownBy(() -> Square.from(rawSquare))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("존재하지 않는 스퀘어입니다.");
+    }
+
+    @DisplayName("방향을 받아서 그 방향만큼 이동한 위치를 반환한다.")
+    @Test
+    void next() {
+        final Square from = Square.from("a1");
+        final Square to = Square.from("b1");
+
+        assertThat(from.next(Direction.E)).isEqualTo(to);
     }
 }

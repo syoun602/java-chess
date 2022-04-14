@@ -25,7 +25,17 @@ public enum Rank {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 랭크입니다."));
     }
 
+    public Rank add(final int yDegree) {
+        final int newValue = value + yDegree;
+        return Rank.from(newValue);
+    }
+
     public int getValue() {
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

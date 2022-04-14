@@ -1,5 +1,6 @@
 package chess.square;
 
+import chess.piece.detail.Direction;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -22,6 +23,10 @@ public class Square {
         this.rank = rank;
     }
 
+    public static Square of(final File file, final Rank rank) {
+        return squareCache.get(file.toString() + rank.toString());
+    }
+
     public static Square from(final String rawSquare) {
         validateLength(rawSquare);
         validateExist(rawSquare);
@@ -30,7 +35,7 @@ public class Square {
 
     private static void initializeSquareCache(final File file) {
         for (Rank rank : Rank.values()) {
-            squareCache.put(file.getValue() + rank.getValue(), new Square(file, rank));
+            squareCache.put(file.toString() + rank.toString(), new Square(file, rank));
         }
     }
 
@@ -46,6 +51,12 @@ public class Square {
         }
     }
 
+    public Square next(final Direction direction) {
+        final File file = this.file.add(direction.getXDegree());
+        final Rank rank = this.rank.add(direction.getYDegree());
+        return Square.of(file, rank);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -57,5 +68,13 @@ public class Square {
     @Override
     public int hashCode() {
         return Objects.hash(file, rank);
+    }
+
+    @Override
+    public String toString() {
+        return "Square{" +
+                "file=" + file +
+                ", rank=" + rank +
+                '}';
     }
 }
