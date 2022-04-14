@@ -7,16 +7,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class RookTest {
+class BishopTest {
 
-    @DisplayName("룩이 갈 수 있는 위치인지 확인한다.")
+    @DisplayName("비숍이 갈 수 있는 위치인지 확인한다.")
     @ParameterizedTest
-    @CsvSource({"d4,d8", "d4,h4", "d4,d1", "d4,a4"})
+    @CsvSource({"d4,a1", "d4,g1", "d4,a7", "d4,h8"})
     void canMove(final String rawFrom, final String rawTo) {
         final Square from = Square.from(rawFrom);
         final Square to = Square.from(rawTo);
-        final Rook rook = new Rook(Team.WHITE, from);
+        final Piece bishop = new Bishop(Team.WHITE, from);
 
-        Assertions.assertThat(rook.canMove(to)).isTrue();
+        Assertions.assertThat(bishop.canMove(to)).isTrue();
     }
 }
