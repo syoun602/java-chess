@@ -34,5 +34,11 @@ public abstract class Piece {
         return team.isWhite();
     }
 
+    public Team getTeam() {
+        return team;
+    }
 
+    public Square getSquare() {
+        return square;
+    }
 }

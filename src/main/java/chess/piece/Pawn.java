@@ -16,7 +16,6 @@ public class Pawn extends SingleMovePiece {
         if (isBlack()) {
             return Direction.getBlackPawnDirections();
         }
-
         return Direction.getWhitePawnDirections();
     }
 }
