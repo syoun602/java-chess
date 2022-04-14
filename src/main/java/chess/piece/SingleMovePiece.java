@@ -5,7 +5,7 @@ import chess.piece.detail.Team;
 import chess.square.Square;
 import java.util.List;
 
-public abstract class SingleMovePiece extends Piece {
+public abstract class SingleMovePiece extends NonBlankPiece {
 
     protected SingleMovePiece(final Team team, final Square square) {
         super(team, square);

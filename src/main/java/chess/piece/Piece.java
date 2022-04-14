@@ -25,4 +25,14 @@ public abstract class Piece {
     abstract boolean canMove(final Square to);
 
     abstract List<Direction> getAvailableDirections();
+
+    public boolean isBlack() {
+        return team.isBlack();
+    }
+
+    public boolean isWhite() {
+        return team.isWhite();
+    }
+
+
 }
