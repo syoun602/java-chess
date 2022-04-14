@@ -54,7 +54,12 @@ public class Square {
     public Square next(final Direction direction) {
         final File file = this.file.add(direction.getXDegree());
         final Rank rank = this.rank.add(direction.getYDegree());
+
         return Square.of(file, rank);
+    }
+
+    public boolean isExist(final Direction direction) {
+        return file.isAddable(direction.getXDegree()) && rank.isAddable(direction.getYDegree());
     }
 
     @Override

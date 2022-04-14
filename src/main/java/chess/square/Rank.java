@@ -22,12 +22,18 @@ public enum Rank {
         return Arrays.stream(values())
                 .filter(rank -> rank.value == value)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 랭크입니다."));
+                .orElseThrow(() -> new IllegalArgumentException(String.format("%d는 존재하지 않는 랭크입니다.", value)));
     }
 
     public Rank add(final int yDegree) {
         final int newValue = value + yDegree;
-        return Rank.from(newValue);
+        return from(newValue);
+    }
+
+    public boolean isAddable(final int yDegree) {
+        final int newValue = value + yDegree;
+        return Arrays.stream(values())
+                .anyMatch(rank -> rank.value == newValue);
     }
 
     public int getValue() {

@@ -1,9 +1,8 @@
 package chess.square;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,7 +14,7 @@ class FileTest {
     @DisplayName("파일 이름으로 자신의 알파벳을 반환한다.")
     @ParameterizedTest
     @CsvSource({"A,a", "B,b", "C,c", "D,d", "E,e", "F,f", "G,g", "H,h"})
-    void getRank(final String name, final String value) {
+    void getRank(final String name, final char value) {
         File enumName = File.valueOf(name);
         assertThat(enumName.getValue()).isEqualTo(value);
     }
@@ -35,7 +34,7 @@ class FileTest {
     void invalidRankException(final char value) {
         assertThatThrownBy(() -> File.from(value))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("존재하지 않는 파일입니다.");
+                .hasMessage(value + "는 존재하지 않는 파일입니다.");
     }
 
     @DisplayName("들어온 값에 따라 변경된 파일을 반환한다.")

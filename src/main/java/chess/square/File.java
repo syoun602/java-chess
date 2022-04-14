@@ -23,11 +23,18 @@ public enum File {
         return Arrays.stream(values())
                 .filter(file -> file.value == value)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 파일입니다."));
+                .orElseThrow(() -> new IllegalArgumentException(String.format("%c는 존재하지 않는 파일입니다.", value)));
     }
+
     public File add(final int xDegree) {
         final int newValue = value + xDegree;
         return from((char) newValue);
+    }
+
+    public boolean isAddable(final int xDegree) {
+        final int newValue = value + xDegree;
+        return Arrays.stream(values())
+                .anyMatch(file -> file.value == newValue);
     }
 
     public char getValue() {

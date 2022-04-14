@@ -34,7 +34,7 @@ class RankTest {
     void invalidRankException(final int value) {
         assertThatThrownBy(() -> Rank.from(value))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("존재하지 않는 랭크입니다.");
+                .hasMessage(value + "는 존재하지 않는 랭크입니다.");
     }
 
     @DisplayName("들어온 값에 따라 변경된 랭크를 반환한다.")
