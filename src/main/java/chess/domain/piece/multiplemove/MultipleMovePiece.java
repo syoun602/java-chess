@@ -1,5 +1,7 @@
-package chess.domain.piece;
+package chess.domain.piece.multiplemove;
 
+import chess.domain.piece.NonBlankPiece;
+import chess.domain.piece.Piece;
 import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
@@ -12,7 +14,7 @@ public abstract class MultipleMovePiece extends NonBlankPiece {
     }
 
     @Override
-    boolean canMove(final Piece piece) {
+    public boolean canMove(final Piece piece) {
         final Square to = piece.getSquare();
         final List<Direction> directions = getAvailableDirections();
         final Direction direction = Direction.findDirection(this.square, to);

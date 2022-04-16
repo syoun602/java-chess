@@ -1,4 +1,4 @@
-package chess.domain.piece;
+package chess.domain.piece.pawn;
 
 import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.Team;
@@ -12,7 +12,7 @@ public class WhitePawn extends Pawn {
     }
 
     @Override
-    List<Direction> getAvailableDirections() {
+    public List<Direction> getAvailableDirections() {
         return Direction.getWhitePawnDirections();
     }
 
@@ -22,7 +22,7 @@ public class WhitePawn extends Pawn {
     }
 
     @Override
-    protected List<Direction> getPawnAttackDirections() {
+    public List<Direction> getPawnAttackDirections() {
         return Direction.getWhitePawnAttackDirections();
     }
 }

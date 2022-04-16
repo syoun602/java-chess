@@ -17,7 +17,7 @@ public abstract class NonBlankPiece extends Piece {
     }
 
     @Override
-    boolean isBlank() {
+    public boolean isBlank() {
         return false;
     }
 }

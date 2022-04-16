@@ -20,17 +20,17 @@ public class Blank extends Piece {
     }
 
     @Override
-    boolean isBlank() {
+    public boolean isBlank() {
         return true;
     }
 
     @Override
-    boolean canMove(final Piece piece) {
+    public boolean canMove(final Piece piece) {
         return false;
     }
 
     @Override
-    List<Direction> getAvailableDirections() {
+    public List<Direction> getAvailableDirections() {
         return Collections.emptyList();
     }
 }

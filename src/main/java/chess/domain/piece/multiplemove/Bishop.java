@@ -1,4 +1,4 @@
-package chess.domain.piece;
+package chess.domain.piece.multiplemove;
 
 import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.Team;
@@ -12,7 +12,7 @@ public class Bishop extends MultipleMovePiece {
     }
 
     @Override
-    List<Direction> getAvailableDirections() {
+    public List<Direction> getAvailableDirections() {
         return Direction.getDiagonalDirections();
     }
 }

@@ -1,7 +1,10 @@
-package chess.domain.piece;
+package chess.domain.piece.pawn;
 
+import chess.domain.piece.Blank;
+import chess.domain.piece.Piece;
 import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.Team;
+import chess.domain.piece.singlemove.King;
 import chess.domain.square.Square;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

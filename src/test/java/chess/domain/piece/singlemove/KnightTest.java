@@ -1,5 +1,6 @@
-package chess.domain.piece;
+package chess.domain.piece.singlemove;
 
+import chess.domain.piece.Blank;
 import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;

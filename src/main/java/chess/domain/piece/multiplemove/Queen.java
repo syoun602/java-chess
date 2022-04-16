@@ -1,18 +1,18 @@
-package chess.domain.piece;
+package chess.domain.piece.multiplemove;
 
 import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
 import java.util.List;
 
-public class King extends SingleMovePiece {
+public class Queen extends MultipleMovePiece {
 
-    public King(final Team team, final Square square) {
+    public Queen(final Team team, final Square square) {
         super(team, square);
     }
 
     @Override
-    List<Direction> getAvailableDirections() {
+    public List<Direction> getAvailableDirections() {
         return Direction.getEveryDirections();
     }
 }

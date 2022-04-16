@@ -15,11 +15,11 @@ public abstract class Piece {
         this.square = square;
     }
 
-    abstract boolean canMove(final Piece piece);
+    public abstract boolean canMove(final Piece piece);
 
-    abstract boolean isBlank();
+    public abstract boolean isBlank();
 
-    abstract List<Direction> getAvailableDirections();
+    protected abstract List<Direction> getAvailableDirections();
 
     public void updateSquare(final Square to) {
         square = to;

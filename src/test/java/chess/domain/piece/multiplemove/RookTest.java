@@ -1,26 +1,23 @@
-package chess.domain.piece;
+package chess.domain.piece.multiplemove;
 
-import static org.assertj.core.api.Assertions.*;
-
+import chess.domain.piece.Blank;
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class QueenTest {
+class RookTest {
 
-    @DisplayName("퀸이 갈 수 있는 위치인지 확인한다.")
+    @DisplayName("룩이 갈 수 있는 위치인지 확인한다.")
     @ParameterizedTest
-    @CsvSource({
-            "d4,d8", "d4,h4", "d4,d1", "d4,a4",
-            "d4,a1", "d4,g1", "d4,a7", "d4,h8"
-    })
+    @CsvSource({"d4,d8", "d4,h4", "d4,d1", "d4,a4"})
     void canMove(final String rawFrom, final String rawTo) {
         final Square from = Square.from(rawFrom);
         final Square to = Square.from(rawTo);
-        final Piece queen = new Queen(Team.WHITE, from);
+        final Rook rook = new Rook(Team.WHITE, from);
 
-        assertThat(queen.canMove(new Blank(Team.NONE, to))).isTrue();
+        Assertions.assertThat(rook.canMove(new Blank(Team.NONE, to))).isTrue();
     }
 }
