@@ -1,6 +1,7 @@
 package chess.domain.piece;
 
 import chess.domain.piece.detail.Direction;
+import chess.domain.piece.detail.PieceType;
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
 import java.util.List;
@@ -18,6 +19,8 @@ public abstract class Piece {
     public abstract boolean canMove(final Piece piece);
 
     public abstract boolean isBlank();
+
+    public abstract PieceType getPieceType();
 
     protected abstract List<Direction> getAvailableDirections();
 

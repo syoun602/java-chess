@@ -1,6 +1,7 @@
 package chess.domain.piece;
 
 import chess.domain.piece.detail.Direction;
+import chess.domain.piece.detail.PieceType;
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
 import java.util.Collections;
@@ -32,5 +33,10 @@ public class Blank extends Piece {
     @Override
     public List<Direction> getAvailableDirections() {
         return Collections.emptyList();
+    }
+
+    @Override
+    public PieceType getPieceType() {
+        return PieceType.BLANK;
     }
 }

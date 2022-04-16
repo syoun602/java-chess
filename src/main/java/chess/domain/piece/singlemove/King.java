@@ -1,6 +1,7 @@
 package chess.domain.piece.singlemove;
 
 import chess.domain.piece.detail.Direction;
+import chess.domain.piece.detail.PieceType;
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
 import java.util.List;
@@ -14,5 +15,10 @@ public class King extends SingleMovePiece {
     @Override
     public List<Direction> getAvailableDirections() {
         return Direction.getEveryDirections();
+    }
+
+    @Override
+    public PieceType getPieceType() {
+        return PieceType.KING;
     }
 }
