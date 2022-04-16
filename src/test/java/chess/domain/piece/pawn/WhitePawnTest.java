@@ -24,4 +24,16 @@ class WhitePawnTest {
 
         Assertions.assertThat(pawn.canMove(new Blank(Team.NONE, to))).isTrue();
     }
+
+    @DisplayName("흰색 폰이 공격할 수 있는지 확인한다.")
+    @ParameterizedTest
+    @CsvSource({"b2,NW", "b2,NE"})
+    void canAttackMove(final String rawSquare, final String rawDirection) {
+        final Square from = Square.from(rawSquare);
+        final Piece pawn = new WhitePawn(Team.WHITE, from);
+        final Direction direction = Direction.valueOf(rawDirection);
+        final Square to = from.next(direction);
+
+        Assertions.assertThat(pawn.canMove(new King(Team.BLACK, to))).isTrue();
+    }
 }
