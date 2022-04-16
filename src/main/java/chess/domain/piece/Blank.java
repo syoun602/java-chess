@@ -15,7 +15,7 @@ public class Blank extends Piece {
 
     private void validateTeam(final Team team) {
         if (!team.isNone()) {
-            throw new IllegalArgumentException("빈칸은 팀이 있으면 안됩니다.");
+            throw new IllegalArgumentException("빈칸은 팀을 가질 수 없습니다.");
         }
     }
 
