@@ -12,9 +12,10 @@ public abstract class MultipleMovePiece extends NonBlankPiece {
     }
 
     @Override
-    boolean canMove(final Square to) {
+    boolean canMove(final Piece piece) {
+        final Square to = piece.getSquare();
         final List<Direction> directions = getAvailableDirections();
-        final Direction direction = Direction.findDirection(square, to);
+        final Direction direction = Direction.findDirection(this.square, to);
         return directions.contains(direction);
     }
 }

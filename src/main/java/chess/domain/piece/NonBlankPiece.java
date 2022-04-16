@@ -15,4 +15,9 @@ public abstract class NonBlankPiece extends Piece {
             throw new IllegalArgumentException("빈칸 외의 기물은 팀이 있어야 합니다.");
         }
     }
+
+    @Override
+    boolean isBlank() {
+        return false;
+    }
 }

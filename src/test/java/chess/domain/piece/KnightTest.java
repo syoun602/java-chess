@@ -19,6 +19,6 @@ class KnightTest {
         final Direction direction = Direction.valueOf(rawDirection);
         final Square to = from.next(direction);
 
-        Assertions.assertThat(knight.canMove(to)).isTrue();
+        Assertions.assertThat(knight.canMove(new Blank(Team.NONE, to))).isTrue();
     }
 }

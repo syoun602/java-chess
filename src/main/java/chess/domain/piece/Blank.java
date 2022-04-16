@@ -3,6 +3,7 @@ package chess.domain.piece;
 import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
+import java.util.Collections;
 import java.util.List;
 
 public class Blank extends Piece {
@@ -19,12 +20,17 @@ public class Blank extends Piece {
     }
 
     @Override
-    boolean canMove(final Square to) {
+    boolean isBlank() {
+        return true;
+    }
+
+    @Override
+    boolean canMove(final Piece piece) {
         return false;
     }
 
     @Override
     List<Direction> getAvailableDirections() {
-        throw new IllegalStateException("빈칸 기물은 이동할 수 있는 방향이 없습니다.");
+        return Collections.emptyList();
     }
 }

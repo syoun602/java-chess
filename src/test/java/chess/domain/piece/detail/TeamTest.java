@@ -27,4 +27,18 @@ class TeamTest {
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("적이 존재할 수 없는 팀입니다.");
     }
+
+    @DisplayName("WHITE 색상인지 확인한다.")
+    @Test
+    void validateWhiteTeam() {
+        Team team = Team.WHITE;
+        assertThat(team.isWhite()).isTrue();
+    }
+
+    @DisplayName("WHITE 색상인지 확인한다.")
+    @Test
+    void validateBlackTeam() {
+        Team team = Team.BLACK;
+        assertThat(team.isBlack()).isTrue();
+    }
 }

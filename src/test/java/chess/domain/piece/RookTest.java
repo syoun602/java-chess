@@ -17,6 +17,6 @@ class RookTest {
         final Square to = Square.from(rawTo);
         final Rook rook = new Rook(Team.WHITE, from);
 
-        Assertions.assertThat(rook.canMove(to)).isTrue();
+        Assertions.assertThat(rook.canMove(new Blank(Team.NONE, to))).isTrue();
     }
 }

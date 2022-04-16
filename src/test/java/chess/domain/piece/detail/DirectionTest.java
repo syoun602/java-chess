@@ -15,14 +15,25 @@ class DirectionTest {
     @Test
     void getWhitePawnDirections() {
         assertThat(Direction.getWhitePawnDirections())
-                .isEqualTo(List.of(N, NW, NE));
-
+                .isEqualTo(List.of(N));
     }
 
     @Test
     void getBlackPawnDirections() {
         assertThat(Direction.getBlackPawnDirections())
-                .isEqualTo(List.of(S, SW, SE));
+                .isEqualTo(List.of(S));
+    }
+
+    @Test
+    void getWhitePawnAttackDirections() {
+        assertThat(Direction.getWhitePawnAttackDirections())
+                .isEqualTo(List.of(NW, NE));
+    }
+
+    @Test
+    void getBlackPawnAttackDirections() {
+        assertThat(Direction.getBlackPawnAttackDirections())
+                .isEqualTo(List.of(SW, SE));
     }
 
     @Test

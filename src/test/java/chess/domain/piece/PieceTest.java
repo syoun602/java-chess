@@ -1,7 +1,6 @@
 package chess.domain.piece;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
@@ -20,16 +19,6 @@ class PieceTest {
         piece.updateSquare(to);
 
         assertThat(piece.getSquare()).isEqualTo(to);
-    }
-
-    @DisplayName("기물이 갈 수 없는 위치일 시 예외를 발생한다.")
-    @Test
-    void invalidUpdateSquareException() {
-        final Piece piece = new Knight(Team.WHITE, Square.from("a1"));
-
-        assertThatThrownBy(() -> piece.updateSquare(Square.from("c1")))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("해당 기물이 이동할 수 없는 위치입니다.");
     }
 
     @DisplayName("기물의 색상을 반환한다.")

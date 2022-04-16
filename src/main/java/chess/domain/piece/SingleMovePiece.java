@@ -12,12 +12,13 @@ public abstract class SingleMovePiece extends NonBlankPiece {
     }
 
     @Override
-    public boolean canMove(final Square to) {
+    public boolean canMove(final Piece piece) {
+        final Square to = piece.getSquare();
         final List<Direction> directions = getAvailableDirections();
 
         return directions.stream()
-                .filter(direction -> square.isExist(direction))
-                .map(direction -> square.next(direction))
+                .filter(direction -> this.square.isExist(direction))
+                .map(direction -> this.square.next(direction))
                 .anyMatch(to::equals);
     }
 }

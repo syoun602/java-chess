@@ -3,6 +3,7 @@ package chess.domain.square;
 import java.util.Arrays;
 
 public enum Rank {
+
     ONE(1),
     TWO(2),
     THREE(3),
@@ -11,6 +12,9 @@ public enum Rank {
     SIX(6),
     SEVEN(7),
     EIGHT(8);
+
+    public static final Rank BLACK_PAWN_INITIAL_RANK = SEVEN;
+    public static final Rank WHITE_PAWN_INITIAL_RANK = TWO;
 
     private final int value;
 

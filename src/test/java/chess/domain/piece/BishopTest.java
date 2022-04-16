@@ -17,6 +17,6 @@ class BishopTest {
         final Square to = Square.from(rawTo);
         final Piece bishop = new Bishop(Team.WHITE, from);
 
-        Assertions.assertThat(bishop.canMove(to)).isTrue();
+        Assertions.assertThat(bishop.canMove(new Blank(Team.NONE, to))).isTrue();
     }
 }

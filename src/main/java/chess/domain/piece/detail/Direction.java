@@ -34,12 +34,21 @@ public enum Direction {
     }
 
     public static List<Direction> getWhitePawnDirections() {
-        return List.of(N, NW, NE);
+        return List.of(N);
+    }
+
+    public static List<Direction> getWhitePawnAttackDirections() {
+        return List.of(NW, NE);
     }
 
     public static List<Direction> getBlackPawnDirections() {
-        return List.of(S, SW, SE);
+        return List.of(S);
     }
+
+    public static List<Direction> getBlackPawnAttackDirections() {
+        return List.of(SW, SE);
+    }
+
 
     public static List<Direction> getEveryDirections() {
         return List.of(N, NE, E, SE, S, SW, W, NW);

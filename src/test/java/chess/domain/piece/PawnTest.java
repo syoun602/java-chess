@@ -1,36 +1,50 @@
 package chess.domain.piece;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.*;
+
 import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class PawnTest {
 
-    @DisplayName("검은색 폰이 움직일 수 있는지 확인한다.")
+    @DisplayName("폰이 같은 팀 기물위치로 이동할수 있는지 확인할 시 false를 반환한다.")
     @ParameterizedTest
-    @CsvSource({"b2,S", "b2,SW", "b2,SE"})
-    void canBlackMove(final String rawSquare, final String rawDirection) {
-        final Square from = Square.from(rawSquare);
-        final Piece pawn = new Pawn(Team.BLACK, from);
-        final Direction direction = Direction.valueOf(rawDirection);
-        final Square to = from.next(direction);
+    @CsvSource({"WHITE,c1", "BLACK,a1"})
+    void canAttackMove(final String rawTeam, final String rawSquare) {
+        final Square from = Square.from("b2");
+        final Square to = Square.from(rawSquare);
+        final Team team = Team.valueOf(rawTeam);
+        final Piece pawn = Pawn.of(team, from);
 
-        Assertions.assertThat(pawn.canMove(to)).isTrue();
+        assertThat(pawn.canMove(new King(team, to))).isFalse();
     }
 
-    @DisplayName("흰색 폰이 움직일 수 있는지 확인한다.")
+    @DisplayName("폰이 초기 위치일 시 두 칸을 이동할 수 있다.")
     @ParameterizedTest
-    @CsvSource({"b1,N", "b1,NW", "b1,NE"})
-    void canWhiteMove(final String rawSquare, final String rawDirection) {
-        final Square from = Square.from(rawSquare);
-        final Piece pawn = new Pawn(Team.WHITE, from);
-        final Direction direction = Direction.valueOf(rawDirection);
-        final Square to = from.next(direction);
+    @CsvSource({"WHITE,a2,a4", "BLACK,a7,a5"})
+    void canAttackMove(final String rawTeam, final String rawFromSquare, final String rawToSquare) {
+        final Square from = Square.from(rawFromSquare);
+        final Square to = Square.from(rawToSquare);
+        final Team team = Team.valueOf(rawTeam);
+        final Piece pawn = Pawn.of(team, from);
 
-        Assertions.assertThat(pawn.canMove(to)).isTrue();
+        assertThat(pawn.canMove(new Blank(Team.NONE, to))).isTrue();
+    }
+
+    @DisplayName("NONE 팀으로 폰을 생성할 시 예외를 발생한다.")
+    @Test
+    void cannotCreatePawnWithNoneTeam() {
+        assertThatThrownBy(() -> Pawn.of(Team.NONE, Square.from("a1")))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("폰 기물의 팀은 NONE일 수 없습니다.");
     }
 }

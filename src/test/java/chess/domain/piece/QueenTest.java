@@ -21,6 +21,6 @@ class QueenTest {
         final Square to = Square.from(rawTo);
         final Piece queen = new Queen(Team.WHITE, from);
 
-        assertThat(queen.canMove(to)).isTrue();
+        assertThat(queen.canMove(new Blank(Team.NONE, to))).isTrue();
     }
 }

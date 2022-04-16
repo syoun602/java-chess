@@ -19,6 +19,6 @@ class KingTest {
         final Direction direction = Direction.valueOf(rawDirection);
         final Square to = from.next(direction);
 
-        Assertions.assertThat(king.canMove(to)).isTrue();
+        Assertions.assertThat(king.canMove(new Blank(Team.NONE, to))).isTrue();
     }
 }

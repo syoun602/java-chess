@@ -1,5 +1,8 @@
 package chess.domain.square;
 
+import static chess.domain.square.Rank.BLACK_PAWN_INITIAL_RANK;
+import static chess.domain.square.Rank.WHITE_PAWN_INITIAL_RANK;
+
 import chess.domain.piece.detail.Direction;
 import java.util.HashMap;
 import java.util.Map;
@@ -77,6 +80,14 @@ public class Square {
 
     public boolean isExist(final Direction direction, final int count) {
         return file.isAddable(direction.getXDegree() * count) && rank.isAddable(direction.getYDegree() * count);
+    }
+
+    public boolean isBlackPawnInitial() {
+        return rank == BLACK_PAWN_INITIAL_RANK;
+    }
+
+    public boolean isWhitePawnInitial() {
+        return rank == WHITE_PAWN_INITIAL_RANK;
     }
 
     @Override
