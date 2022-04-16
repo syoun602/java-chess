@@ -3,6 +3,7 @@ package chess.domain.piece;
 import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.PieceType;
 import chess.domain.piece.detail.Team;
+import chess.domain.piece.multiplemove.Bishop;
 import chess.domain.square.Square;
 import java.util.Collections;
 import java.util.List;
@@ -21,12 +22,17 @@ public class Blank extends Piece {
     }
 
     @Override
+    public Piece moveTo(final Square to) {
+        throw new IllegalStateException("빈칸은 이동할 수 없습니다.");
+    }
+
+    @Override
     public boolean isBlank() {
         return true;
     }
 
     @Override
-    public boolean canMove(final Piece piece) {
+    public boolean isMovable(final Piece piece) {
         return false;
     }
 

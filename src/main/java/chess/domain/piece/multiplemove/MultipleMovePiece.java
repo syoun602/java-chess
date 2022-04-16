@@ -14,7 +14,7 @@ public abstract class MultipleMovePiece extends NonBlankPiece {
     }
 
     @Override
-    public boolean canMove(final Piece piece) {
+    protected boolean isMovable(final Piece piece) {
         final Square to = piece.getSquare();
         final List<Direction> directions = getAvailableDirections();
         final Direction direction = Direction.findDirection(this.square, to);

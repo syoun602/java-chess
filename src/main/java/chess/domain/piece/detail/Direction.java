@@ -1,6 +1,7 @@
 package chess.domain.piece.detail;
 
 import chess.domain.square.Square;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -64,6 +65,15 @@ public enum Direction {
 
     public static List<Direction> getKnightDirections() {
         return List.of(NNE, ENE, ESE, SSE, SSW, WSW, WNW, NNW);
+    }
+
+    public static Direction findAllDirections(final Square from, final Square to) {
+        List<Direction> directions = new ArrayList<>(getEveryDirections());
+        directions.addAll(getKnightDirections());
+        return directions.stream()
+                .filter(direction -> isInDirections(from, to, direction))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("해당 위치로의 방향을 찾을 수 없습니다."));
     }
 
     public static Direction findDirection(final Square from, final Square to) {

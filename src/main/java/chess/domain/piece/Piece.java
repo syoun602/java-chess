@@ -16,13 +16,20 @@ public abstract class Piece {
         this.square = square;
     }
 
-    public abstract boolean canMove(final Piece piece);
+    public abstract Piece moveTo(final Square to);
 
     public abstract boolean isBlank();
 
     public abstract PieceType getPieceType();
 
+    protected abstract boolean isMovable(final Piece piece);
+
     protected abstract List<Direction> getAvailableDirections();
+
+    public boolean canMove(final Piece piece) {
+        validateMove(piece);
+        return isMovable(piece);
+    }
 
     public void updateSquare(final Square to) {
         square = to;
@@ -38,6 +45,12 @@ public abstract class Piece {
 
     public boolean isWhite() {
         return team.isWhite();
+    }
+
+    private void validateMove(final Piece piece) {
+        if (this.isSameTeam(piece)) {
+            throw new IllegalArgumentException("같은 팀 위치로는 이동할 수 없습니다.");
+        }
     }
 
     public Team getTeam() {

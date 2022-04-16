@@ -7,6 +7,7 @@ import chess.domain.piece.Piece;
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -24,5 +25,15 @@ class QueenTest {
         final Piece queen = new Queen(Team.WHITE, from);
 
         assertThat(queen.canMove(new Blank(Team.NONE, to))).isTrue();
+    }
+
+    @DisplayName("퀸이 움직이면 새로운 위치로의 객체를 반환한다.")
+    @Test
+    void getSquareOfMovedQueen() {
+        final Piece piece = new Queen(Team.WHITE, Square.from("a1"));
+        final Square to = Square.from("a2");
+        final Piece newPiece = piece.moveTo(to);
+
+        assertThat(newPiece.getSquare()).isEqualTo(to);
     }
 }

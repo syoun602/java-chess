@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import chess.domain.piece.detail.Team;
+import chess.domain.piece.pawn.Pawn;
 import chess.domain.piece.singlemove.King;
 import chess.domain.square.Square;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +28,7 @@ class BlankTest {
     @Test
     void blankCannotMove() {
         final Blank blank = new Blank(Team.NONE, Square.from("a1"));
-        assertThat(blank.canMove(new King(Team.BLACK, Square.from("a2")))).isFalse();
+        assertThat(blank.isMovable(new King(Team.BLACK, Square.from("a2")))).isFalse();
     }
 
     @DisplayName("빈칸이 이동할 수 있는 방향을 찾을 시 빈 리스트를 반환한다.")
@@ -35,5 +36,16 @@ class BlankTest {
     void getAvailableDirections() {
         final Blank blank = new Blank(Team.NONE, Square.from("a1"));
         assertThat(blank.getAvailableDirections()).isEqualTo(List.of());
+    }
+
+    @DisplayName("빈칸이 움직일 경우 예외를 발생한다.")
+    @Test
+    void blankCannotMoveToAnywhere() {
+        final Piece piece = new Blank(Team.NONE, Square.from("a1"));
+        final Square to = Square.from("a2");
+
+        assertThatThrownBy(() -> piece.moveTo(to))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("빈칸은 이동할 수 없습니다.");
     }
 }

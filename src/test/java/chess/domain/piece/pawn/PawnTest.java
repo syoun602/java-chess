@@ -1,31 +1,22 @@
 package chess.domain.piece.pawn;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import chess.domain.piece.Blank;
 import chess.domain.piece.Piece;
+import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.Team;
 import chess.domain.piece.singlemove.King;
 import chess.domain.square.Square;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class PawnTest {
-
-    @DisplayName("폰이 같은 팀 기물위치로 이동할수 있는지 확인할 시 false를 반환한다.")
-    @ParameterizedTest
-    @CsvSource({"WHITE,c1", "BLACK,a1"})
-    void canAttackMove(final String rawTeam, final String rawSquare) {
-        final Square from = Square.from("b2");
-        final Square to = Square.from(rawSquare);
-        final Team team = Team.valueOf(rawTeam);
-        final Piece pawn = Pawn.of(team, from);
-
-        assertThat(pawn.canMove(new King(team, to))).isFalse();
-    }
 
     @DisplayName("폰이 초기 위치일 시 두 칸을 이동할 수 있다.")
     @ParameterizedTest
@@ -45,5 +36,15 @@ class PawnTest {
         assertThatThrownBy(() -> Pawn.of(Team.NONE, Square.from("a1")))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("폰 기물의 팀은 NONE일 수 없습니다.");
+    }
+
+    @DisplayName("폰이 움직이면 새로운 위치로의 객체를 반환한다.")
+    @Test
+    void getSquareOfMovedPiece() {
+        final Piece piece = Pawn.of(Team.WHITE, Square.from("a1"));
+        final Square to = Square.from("a2");
+        final Piece newPiece = piece.moveTo(to);
+
+        assertThat(newPiece.getSquare()).isEqualTo(to);
     }
 }

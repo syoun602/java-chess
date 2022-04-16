@@ -5,6 +5,7 @@ import chess.domain.piece.Piece;
 import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.PieceType;
 import chess.domain.piece.detail.Team;
+import chess.domain.piece.multiplemove.Bishop;
 import chess.domain.square.Square;
 import java.util.List;
 
@@ -29,14 +30,15 @@ public abstract class Pawn extends NonBlankPiece {
     protected abstract List<Direction> getPawnAttackDirections();
 
     @Override
-    public boolean canMove(final Piece target) {
+    public Piece moveTo(final Square to) {
+        return Pawn.of(getTeam(), to);
+    }
+
+    @Override
+    protected boolean isMovable(final Piece target) {
         final Square to = target.getSquare();
         final List<Direction> directions = getAvailableDirections();
         final Direction direction = directions.get(0);
-
-        if (isSameTeam(target)) {
-            return false;
-        }
 
         if (target.isBlank()) {
             return isAvailableMoveToBlank(to, direction);

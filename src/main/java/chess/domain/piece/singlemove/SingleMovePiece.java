@@ -14,7 +14,7 @@ public abstract class SingleMovePiece extends NonBlankPiece {
     }
 
     @Override
-    public boolean canMove(final Piece piece) {
+    protected boolean isMovable(final Piece piece) {
         final Square to = piece.getSquare();
         final List<Direction> directions = getAvailableDirections();
 

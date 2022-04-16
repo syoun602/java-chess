@@ -1,11 +1,16 @@
 package chess.domain.piece.singlemove;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import chess.domain.piece.Blank;
+import chess.domain.piece.Piece;
 import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.Team;
+import chess.domain.piece.pawn.Pawn;
 import chess.domain.square.Square;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -21,5 +26,15 @@ class KnightTest {
         final Square to = from.next(direction);
 
         Assertions.assertThat(knight.canMove(new Blank(Team.NONE, to))).isTrue();
+    }
+
+    @DisplayName("나이트가 움직이면 새로운 위치로의 객체를 반환한다.")
+    @Test
+    void getSquareOfMovedKnight() {
+        final Piece piece = new Knight(Team.WHITE, Square.from("a1"));
+        final Square to = Square.from("a2");
+        final Piece newPiece = piece.moveTo(to);
+
+        assertThat(newPiece.getSquare()).isEqualTo(to);
     }
 }

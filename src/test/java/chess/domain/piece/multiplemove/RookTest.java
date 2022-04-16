@@ -1,10 +1,14 @@
 package chess.domain.piece.multiplemove;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import chess.domain.piece.Blank;
+import chess.domain.piece.Piece;
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -19,5 +23,15 @@ class RookTest {
         final Rook rook = new Rook(Team.WHITE, from);
 
         Assertions.assertThat(rook.canMove(new Blank(Team.NONE, to))).isTrue();
+    }
+
+    @DisplayName("룩이 움직이면 새로운 위치로의 객체를 반환한다.")
+    @Test
+    void getSquareOfMovedRook() {
+        final Piece piece = new Rook(Team.WHITE, Square.from("a1"));
+        final Square to = Square.from("a2");
+        final Piece newPiece = piece.moveTo(to);
+
+        assertThat(newPiece.getSquare()).isEqualTo(to);
     }
 }
