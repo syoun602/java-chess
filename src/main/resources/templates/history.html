@@ -8,23 +8,23 @@
             crossorigin="anonymous"></script>
     <link href="/css/chess.css" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>게임 결과</title>
+    <title>Title</title>
 </head>
 <body>
-<div style="display: flex; justify-content: center; text-align: center; padding-top: 25vh;">
-    <div class="card text-center" style="width: 80vw;">
-        <div class="card-header">
-            게임 결과
-        </div>
+<div class="chess-header">
+    <button class="btn btn-danger" onclick="location.href='/member-management'">멤버 관리 페이지로</button>
+</div>
+<div class="container" style="flex-direction: column;">
+    {{#history}}
+    <div class="card" style="width: 100%; margin-top: 1vh;">
         <div class="card-body">
-            <h5 class="card-title">승자: {{winner}}</h5>
-            <p class="card-text">백팀 점수: {{whiteScore}}</p>
-            <p class="card-text">흑팀 점수: {{blackScore}}</p>
-        </div>
-        <div class="card-footer text-muted">
-            <button class="btn btn-dark" onclick="location.href ='/'">로비로 이동</button>
+            <h5 class="card-title">vs {{enemyName}}({{result}})</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{team}}팀</h6>
+            <p class="card-text">내 점수 :{{myScore}}</p>
+            <p class="card-text">상대 점수 :{{enemyScore}}</p>
         </div>
     </div>
+    {{/history}}
 </div>
 </body>
 </html>

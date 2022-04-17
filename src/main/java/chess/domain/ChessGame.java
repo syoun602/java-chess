@@ -8,20 +8,31 @@ import chess.domain.square.Square;
 import java.util.List;
 import java.util.Map;
 
-public class Game {
+public class ChessGame {
 
     private Long id;
     private final Board board;
     private Team turn;
+    private Participant participant;
 
-    public Game(final Long id, final Board board, final Team turn) {
+
+    public ChessGame(final Long id, final Board board, final Team turn, final Participant participant) {
         this.id = id;
         this.board = board;
         this.turn = turn;
+        this.participant = participant;
     }
 
-    public static Game initGame() {
-        return new Game(null, new Board(BoardInitializer.create()), Team.WHITE);
+    public ChessGame(final Long id, final Board board, final Team turn) {
+        this(id, board, turn, null);
+    }
+
+    public ChessGame(final Board board, final Team turn, final Participant participant) {
+        this(null, board, turn, participant);
+    }
+
+    public static ChessGame initGame() {
+        return new ChessGame(null, new Board(BoardInitializer.create()), Team.WHITE);
     }
 
     public void move(Square from, Square to) {
@@ -40,6 +51,10 @@ public class Game {
 
     public void terminate() {
         turn = Team.NONE;
+    }
+
+    public boolean isEnd() {
+        return turn == Team.NONE;
     }
 
     private void validateTurn(Square from) {
@@ -103,5 +118,23 @@ public class Game {
 
     public Team getTurn() {
         return turn;
+    }
+
+    public Participant getParticipant() {
+        return participant;
+    }
+
+    public Long getWhiteId() {
+        return participant.getWhiteId();
+    }
+
+    public Long getBlackId() {
+        return participant.getBlackId();
+    }
+
+    public Long getWinnerId() {
+        Result result = createResult();
+        final Team team = result.getWinner();
+        return participant.getIdByTeam(team);
     }
 }

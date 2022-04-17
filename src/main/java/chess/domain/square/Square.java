@@ -90,6 +90,10 @@ public class Square {
         return rank == WHITE_PAWN_INITIAL_RANK;
     }
 
+    public String toRawSquare() {
+        return file.toString() + rank.toString();
+    }
+
     public File getFile() {
         return file;
     }

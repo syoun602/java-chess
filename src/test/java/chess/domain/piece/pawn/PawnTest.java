@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import chess.domain.piece.Blank;
 import chess.domain.piece.Piece;
 import chess.domain.piece.detail.Team;
-import chess.domain.piece.multiplemove.Queen;
 import chess.domain.square.Square;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

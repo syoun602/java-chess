@@ -47,6 +47,14 @@ public abstract class Piece {
         return false;
     }
 
+    public boolean isBlack() {
+        return team.isBlack();
+    }
+
+    public boolean isWhite() {
+        return team.isWhite();
+    }
+
     private void validateMove(final Piece piece) {
         if (this.isSameTeam(piece)) {
             throw new IllegalArgumentException("같은 팀 위치로는 이동할 수 없습니다.");
