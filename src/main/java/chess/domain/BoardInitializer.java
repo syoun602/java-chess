@@ -1,12 +1,9 @@
 package chess.domain;
 
 import static chess.domain.piece.detail.Team.*;
-import static chess.domain.piece.detail.Team.BLACK;
-import static chess.domain.piece.detail.Team.WHITE;
 
 import chess.domain.piece.Blank;
 import chess.domain.piece.Piece;
-import chess.domain.piece.detail.Team;
 import chess.domain.piece.multiplemove.Bishop;
 import chess.domain.piece.multiplemove.Queen;
 import chess.domain.piece.multiplemove.Rook;
@@ -20,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BoardInitializer {
-    
+
     public static Map<Square, Piece> create() {
         final HashMap<Square, Piece> board = new HashMap<>();
         createKings(board);

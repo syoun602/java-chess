@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import chess.domain.piece.Blank;
 import chess.domain.piece.Piece;
 import chess.domain.piece.detail.Team;
-import chess.domain.piece.pawn.Pawn;
 import chess.domain.square.Square;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

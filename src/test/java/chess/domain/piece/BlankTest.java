@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import chess.domain.piece.detail.Team;
-import chess.domain.piece.pawn.Pawn;
 import chess.domain.piece.singlemove.King;
 import chess.domain.square.Square;
 import org.junit.jupiter.api.DisplayName;

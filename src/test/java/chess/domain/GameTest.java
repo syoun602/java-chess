@@ -3,10 +3,9 @@ package chess.domain;
 import static chess.domain.piece.detail.Team.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import chess.domain.piece.Piece;
-import chess.domain.piece.detail.Team;
 import chess.domain.piece.multiplemove.Bishop;
 import chess.domain.piece.multiplemove.Queen;
 import chess.domain.piece.multiplemove.Rook;

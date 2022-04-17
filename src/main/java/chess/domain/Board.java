@@ -1,6 +1,6 @@
 package chess.domain;
 
-import static chess.domain.piece.detail.Team.*;
+import static chess.domain.piece.detail.Team.NONE;
 
 import chess.domain.piece.Blank;
 import chess.domain.piece.Piece;
@@ -65,7 +65,7 @@ public class Board {
 
     private void validateRoute(final Square from, final Square to) {
         Direction direction = Direction.findAllDirections(from, to);
-        for(Square square = from.next(direction); !square.equals(to); square = square.next(direction)) {
+        for (Square square = from.next(direction); !square.equals(to); square = square.next(direction)) {
             validateBlock(square);
         }
     }
