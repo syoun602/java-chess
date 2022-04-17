@@ -16,14 +16,14 @@ class TeamTest {
     void findOpponent(final String rawTeam, final String rawOpponent) {
         Team team = Team.valueOf(rawTeam);
         Team opponent = Team.valueOf(rawOpponent);
-        assertThat(team.findOpponent()).isSameAs(opponent);
+        assertThat(team.reverse()).isSameAs(opponent);
     }
 
     @DisplayName("NONE으로 적팀을 찾을 시 예외가 발생한다.")
     @Test
     void noneOpponentException() {
         Team team = Team.NONE;
-        assertThatThrownBy(team::findOpponent)
+        assertThatThrownBy(team::reverse)
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("적이 존재할 수 없는 팀입니다.");
     }

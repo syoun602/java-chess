@@ -39,6 +39,10 @@ public abstract class Piece {
         return team == target.team;
     }
 
+    public boolean isSameTeam(final Team team) {
+        return this.team == team;
+    }
+
     public boolean isBlack() {
         return team.isBlack();
     }

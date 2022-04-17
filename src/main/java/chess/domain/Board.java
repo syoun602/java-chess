@@ -5,6 +5,7 @@ import static chess.domain.piece.detail.Team.*;
 import chess.domain.piece.Blank;
 import chess.domain.piece.Piece;
 import chess.domain.piece.detail.Direction;
+import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
 import java.util.Map;
 
@@ -25,6 +26,11 @@ public class Board {
 
         value.put(to, source.moveTo(to));
         value.put(from, new Blank(NONE, from));
+    }
+
+    public boolean isSameTeam(final Square from, final Team team) {
+        final Piece piece = value.get(from);
+        return piece.isSameTeam(team);
     }
 
     private void validateMove(final Piece source, final Piece target) {

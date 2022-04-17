@@ -7,7 +7,7 @@ public enum Team {
     NONE,
     ;
 
-    public Team findOpponent() {
+    public Team reverse() {
         if (this == WHITE) {
             return BLACK;
         }
