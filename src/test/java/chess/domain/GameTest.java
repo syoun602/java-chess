@@ -1,16 +1,24 @@
 package chess.domain;
 
+import static chess.domain.piece.detail.Team.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 import chess.domain.piece.Piece;
 import chess.domain.piece.detail.Team;
+import chess.domain.piece.multiplemove.Bishop;
+import chess.domain.piece.multiplemove.Queen;
+import chess.domain.piece.multiplemove.Rook;
+import chess.domain.piece.pawn.Pawn;
+import chess.domain.piece.singlemove.Knight;
 import chess.domain.square.Square;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import java.util.HashMap;
+import java.util.Map;
 
 class GameTest {
 
@@ -56,7 +64,7 @@ class GameTest {
 
         game.move(from, to);
 
-        assertThat(game.getTurn()).isEqualTo(Team.BLACK);
+        assertThat(game.getTurn()).isEqualTo(BLACK);
     }
 
     @DisplayName("게임에 종료 명령을 주면 게임이 종료된다.")
@@ -64,7 +72,7 @@ class GameTest {
     void terminate() {
         final Game game = Game.initGame();
         game.terminate();
-        assertThat(game.getTurn()).isSameAs(Team.NONE);
+        assertThat(game.getTurn()).isSameAs(NONE);
     }
 
     @DisplayName("종료된 게임에 기물을 움직이려하면 예외가 발생한다.")
@@ -75,5 +83,25 @@ class GameTest {
         assertThatThrownBy(() -> game.move(Square.from("a1"), Square.from("a2")))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("이미 종료된 게임입니다.");
+    }
+
+    @Test
+    void createResult() {
+        Map<Square, Piece> board = new HashMap<>();
+        board.put(Square.from("a1"), Pawn.of(WHITE, Square.from("a1")));
+        board.put(Square.from("a2"), Pawn.of(WHITE, Square.from("a2")));
+        board.put(Square.from("a3"), Pawn.of(WHITE, Square.from("a3"))); // Score : 1.5
+
+        board.put(Square.from("b1"), Pawn.of(WHITE, Square.from("b1"))); // Score : 2.5
+
+        board.put(Square.from("c1"), new Rook(WHITE, Square.from("c1"))); // Score : 7.5
+        board.put(Square.from("d1"), new Knight(WHITE, Square.from("d1"))); // Score : 10
+        board.put(Square.from("e1"), new Bishop(WHITE, Square.from("e1"))); // Score : 13
+        board.put(Square.from("f1"), new Queen(WHITE, Square.from("f1"))); // Score : 22
+
+        final Game game = new Game(1L, new Board(board), WHITE);
+        final Result result = game.createResult();
+
+        assertThat(result.getWhiteScore()).isEqualTo(22);
     }
 }

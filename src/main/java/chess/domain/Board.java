@@ -6,8 +6,12 @@ import chess.domain.piece.Blank;
 import chess.domain.piece.Piece;
 import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.Team;
+import chess.domain.square.File;
 import chess.domain.square.Square;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Board {
 
@@ -31,6 +35,26 @@ public class Board {
     public boolean isSameTeam(final Square from, final Team team) {
         final Piece piece = value.get(from);
         return piece.isSameTeam(team);
+    }
+
+    public Map<File, List<Piece>> findFilesByTeam(final Team team) {
+        Map<File, List<Piece>> files = new EnumMap<>(File.class);
+
+        for (File file : File.values()) {
+            final List<Piece> pieces = getPiecesByFileAndTeam(file, team);
+            files.put(file, pieces);
+        }
+
+        return files;
+    }
+
+    private List<Piece> getPiecesByFileAndTeam(final File file, final Team team) {
+        return value.keySet()
+                .stream()
+                .filter(square -> square.getFile() == file)
+                .map(value::get)
+                .filter(piece -> piece.getTeam() == team)
+                .collect(Collectors.toList());
     }
 
     private void validateMove(final Piece source, final Piece target) {

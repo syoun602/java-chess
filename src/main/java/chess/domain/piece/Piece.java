@@ -64,4 +64,8 @@ public abstract class Piece {
     public Square getSquare() {
         return square;
     }
+
+    public double getScore() {
+        return getPieceType().getScore();
+    }
 }
