@@ -9,6 +9,7 @@ import chess.domain.piece.Piece;
 import chess.domain.square.Rank;
 import chess.dto.GameResultDto;
 import chess.dto.RankDto;
+import chess.dto.ResponseDto;
 import chess.service.GameService;
 import chess.service.MemberService;
 import chess.util.JsonUtil;
@@ -71,12 +72,12 @@ public class WebController {
 
         final Map<String, Object> model = new HashMap<>();
         model.put("turn", chessGame.getTurn());
-        model.put("ranks", makeRanksDTO(chessGame));
+        model.put("ranks", makeRanksDto(chessGame));
         model.put("gameId", gameId);
         return render(model, "play.html");
     }
 
-    private List<RankDto> makeRanksDTO(final ChessGame chessGame) {
+    private List<RankDto> makeRanksDto(final ChessGame chessGame) {
         final List<RankDto> ranks = new ArrayList<>();
         for (int i = 8; i > 0; i--) {
             final List<Piece> pieces = chessGame.getBoard().getPiecesByRank(Rank.from(i));
@@ -132,11 +133,15 @@ public class WebController {
         return "OK";
     }
 
-    private String movePiece(final Request req, final Response res) {
+    private ResponseDto movePiece(final Request req, final Response res) {
         final Long gameId = Long.valueOf(req.params("gameId"));
         final String[] positions = req.body().split(",");
-        gameService.move(gameId, positions[0], positions[1]);
-        return "OK";
+        try {
+            gameService.move(gameId, positions[0], positions[1]);
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            return new ResponseDto(400, e.getMessage());
+        }
+        return new ResponseDto(200, "");
     }
 
     private String terminateGame(final Request req, final Response res) {

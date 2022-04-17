@@ -84,11 +84,13 @@
             method: "POST",
             body: `${startPosition},${position}`
         }).then(response => {
-            if (!response.ok) {
-                alert("이동 실패");
-            }
-            location.reload();
-        })
+            response.json().then(data => {
+                if (data.statusCode === 400) {
+                    alert(data.message);
+                }
+                location.reload();
+            });
+        }).catch(error => alert(error));
     }
 
     const terminate = () => {
