@@ -48,4 +48,20 @@ class PieceTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("같은 팀 위치로는 이동할 수 없습니다.");
     }
+
+    @DisplayName("기물의 색상이 검정색인지 확인한다.")
+    @Test
+    void isBlackPiece() {
+        final Team team = Team.BLACK;
+        final Piece piece = new Knight(team, Square.from("a1"));
+        assertThat(piece.getTeam().isBlack()).isTrue();
+    }
+
+    @DisplayName("기물의 색상이 흰색인지 확인한다.")
+    @Test
+    void isWhitePiece() {
+        final Team team = Team.WHITE;
+        final Piece piece = new Knight(team, Square.from("a1"));
+        assertThat(piece.getTeam().isWhite()).isTrue();
+    }
 }

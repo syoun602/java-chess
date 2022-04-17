@@ -2,7 +2,12 @@ package chess.service;
 
 import chess.dao.GameDao;
 import chess.dao.MemberDao;
-import chess.domain.*;
+import chess.domain.Board;
+import chess.domain.BoardInitializer;
+import chess.domain.ChessGame;
+import chess.domain.Member;
+import chess.domain.Participant;
+import chess.domain.Result;
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
 import chess.dto.GameResultDto;

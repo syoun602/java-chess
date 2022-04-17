@@ -5,15 +5,20 @@ import chess.domain.ChessGame;
 import chess.domain.Member;
 import chess.domain.Participant;
 import chess.domain.piece.Piece;
+import chess.domain.piece.PieceFactory;
 import chess.domain.piece.detail.PieceType;
 import chess.domain.piece.detail.Team;
 import chess.domain.square.Square;
-import chess.piece.PieceFactory;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class DatabaseGameDao implements GameDao {

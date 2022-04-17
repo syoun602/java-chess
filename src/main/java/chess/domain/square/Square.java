@@ -104,8 +104,12 @@ public class Square {
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Square)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Square)) {
+            return false;
+        }
         final Square square = (Square) o;
         return file == square.file && rank == square.rank;
     }

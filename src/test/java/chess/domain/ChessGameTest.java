@@ -1,6 +1,8 @@
 package chess.domain;
 
-import static chess.domain.piece.detail.Team.*;
+import static chess.domain.piece.detail.Team.BLACK;
+import static chess.domain.piece.detail.Team.NONE;
+import static chess.domain.piece.detail.Team.WHITE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -14,12 +16,12 @@ import chess.domain.piece.pawn.Pawn;
 import chess.domain.piece.singlemove.King;
 import chess.domain.piece.singlemove.Knight;
 import chess.domain.square.Square;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import java.util.HashMap;
-import java.util.Map;
 
 class ChessGameTest {
 

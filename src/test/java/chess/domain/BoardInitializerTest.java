@@ -7,10 +7,10 @@ import chess.domain.piece.detail.PieceType;
 import chess.domain.square.File;
 import chess.domain.square.Rank;
 import chess.domain.square.Square;
-import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.Test;
 
 class BoardInitializerTest {
 

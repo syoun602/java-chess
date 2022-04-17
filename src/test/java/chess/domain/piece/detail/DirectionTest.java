@@ -1,14 +1,29 @@
 package chess.domain.piece.detail;
 
-import static chess.domain.piece.detail.Direction.*;
+import static chess.domain.piece.detail.Direction.E;
+import static chess.domain.piece.detail.Direction.ENE;
+import static chess.domain.piece.detail.Direction.ESE;
+import static chess.domain.piece.detail.Direction.N;
+import static chess.domain.piece.detail.Direction.NE;
+import static chess.domain.piece.detail.Direction.NNE;
+import static chess.domain.piece.detail.Direction.NNW;
+import static chess.domain.piece.detail.Direction.NW;
+import static chess.domain.piece.detail.Direction.S;
+import static chess.domain.piece.detail.Direction.SE;
+import static chess.domain.piece.detail.Direction.SSE;
+import static chess.domain.piece.detail.Direction.SSW;
+import static chess.domain.piece.detail.Direction.SW;
+import static chess.domain.piece.detail.Direction.W;
+import static chess.domain.piece.detail.Direction.WNW;
+import static chess.domain.piece.detail.Direction.WSW;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import chess.domain.square.Square;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import java.util.List;
 
 class DirectionTest {
 

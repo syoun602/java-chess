@@ -1,6 +1,8 @@
 package chess.domain;
 
-import static chess.domain.piece.detail.Team.*;
+import static chess.domain.piece.detail.Team.BLACK;
+import static chess.domain.piece.detail.Team.NONE;
+import static chess.domain.piece.detail.Team.WHITE;
 
 import chess.domain.piece.Blank;
 import chess.domain.piece.Piece;
