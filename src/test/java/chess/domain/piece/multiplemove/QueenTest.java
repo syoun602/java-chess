@@ -36,4 +36,11 @@ class QueenTest {
 
         assertThat(newPiece.getSquare()).isEqualTo(to);
     }
+
+    @DisplayName("퀸에 킹인지 물어봤을 때 false를 반환한다.")
+    @Test
+    void isQueenKing() {
+        final Piece piece = new Queen(Team.WHITE, Square.from("a1"));
+        assertThat(piece.isKing()).isFalse();
+    }
 }

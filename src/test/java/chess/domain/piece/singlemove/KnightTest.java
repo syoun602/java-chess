@@ -6,6 +6,7 @@ import chess.domain.piece.Blank;
 import chess.domain.piece.Piece;
 import chess.domain.piece.detail.Direction;
 import chess.domain.piece.detail.Team;
+import chess.domain.piece.multiplemove.Queen;
 import chess.domain.square.Square;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -35,5 +36,12 @@ class KnightTest {
         final Piece newPiece = piece.moveTo(to);
 
         assertThat(newPiece.getSquare()).isEqualTo(to);
+    }
+
+    @DisplayName("나이트에 킹인지 물어봤을 때 false를 반환한다.")
+    @Test
+    void isKnightKing() {
+        final Piece piece = new Knight(Team.WHITE, Square.from("a1"));
+        assertThat(piece.isKing()).isFalse();
     }
 }

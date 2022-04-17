@@ -5,11 +5,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import chess.domain.piece.Blank;
 import chess.domain.piece.Piece;
+import chess.domain.piece.detail.Team;
 import chess.domain.piece.multiplemove.Bishop;
 import chess.domain.piece.multiplemove.Queen;
 import chess.domain.piece.multiplemove.Rook;
 import chess.domain.piece.pawn.Pawn;
+import chess.domain.piece.singlemove.King;
 import chess.domain.piece.singlemove.Knight;
 import chess.domain.square.Square;
 import org.junit.jupiter.api.DisplayName;
@@ -84,6 +87,7 @@ class GameTest {
                 .hasMessage("이미 종료된 게임입니다.");
     }
 
+    @DisplayName("현재 점수에 대한 결과를 반환한다.")
     @Test
     void createResult() {
         Map<Square, Piece> board = new HashMap<>();
@@ -101,6 +105,36 @@ class GameTest {
         final Game game = new Game(1L, new Board(board), WHITE);
         final Result result = game.createResult();
 
-        assertThat(result.getWhiteScore()).isEqualTo(22);
+        assertAll(
+                () -> assertThat(result.getWhiteScore()).isEqualTo(22),
+                () -> assertThat(result.getBlackScore()).isEqualTo(0)
+        );
+    }
+
+    @DisplayName("킹이 잡혀서 더 이상 턴이 진행될 수 없는 NONE을 반환한다.")
+    @Test
+    void gameEndByOneAliveKing() {
+        Map<Square, Piece> board = new HashMap<>();
+        board.put(Square.from("a1"), new King(WHITE, Square.from("a1")));
+        board.put(Square.from("a2"), new King(BLACK, Square.from("a2")));
+        final Game game = new Game(1L, new Board(board), WHITE);
+
+        game.move(Square.from("a1"), Square.from("a2"));
+
+        assertThat(game.getTurn()).isSameAs(Team.NONE);
+    }
+
+    @DisplayName("킹이 죽어서 게임이 끝난 경우, 점수와 관계없는 결과인 살아남는 킹의 팀이 이긴 결과를 반환한다.")
+    @Test
+    void createResultByOneAliveKing() {
+        Map<Square, Piece> board = new HashMap<>();
+        board.put(Square.from("a1"), new King(WHITE, Square.from("a1")));
+        board.put(Square.from("a2"), new King(BLACK, Square.from("a2")));
+
+        final Game game = new Game(1L, new Board(board), WHITE);
+        game.move(Square.from("a1"), Square.from("a2"));
+        final Result result = game.createResult();
+
+        assertThat(result.getWinner()).isSameAs(Team.WHITE);
     }
 }

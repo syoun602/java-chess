@@ -6,11 +6,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import chess.domain.piece.Blank;
 import chess.domain.piece.Piece;
 import chess.domain.piece.detail.Team;
+import chess.domain.piece.multiplemove.Queen;
 import chess.domain.square.Square;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class PawnTest {
 
@@ -42,5 +44,13 @@ class PawnTest {
         final Piece newPiece = piece.moveTo(to);
 
         assertThat(newPiece.getSquare()).isEqualTo(to);
+    }
+
+    @DisplayName("블랙 폰에 킹인지 물어봤을 때 false를 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"BLACK", "WHITE"})
+    void isQueenKing(final String rawTeam) {
+        final Piece piece = Pawn.of(Team.valueOf(rawTeam), Square.from("a1"));
+        assertThat(piece.isKing()).isFalse();
     }
 }

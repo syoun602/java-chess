@@ -48,6 +48,22 @@ public class Board {
         return files;
     }
 
+    public boolean isKingDead() {
+        return value.values()
+                .stream()
+                .filter(Piece::isKing)
+                .count() == 1;
+    }
+
+    public Team getTeamWithAliveKing() {
+        return value.values()
+                .stream()
+                .filter(Piece::isKing)
+                .findFirst()
+                .map(Piece::getTeam)
+                .orElseThrow(() -> new IllegalStateException("보드에 킹이 존재하지 않습니다."));
+    }
+
     private List<Piece> getPiecesByFileAndTeam(final File file, final Team team) {
         return value.keySet()
                 .stream()

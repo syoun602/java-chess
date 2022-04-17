@@ -4,10 +4,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import chess.domain.piece.Piece;
+import chess.domain.piece.detail.Team;
+import chess.domain.piece.multiplemove.Rook;
+import chess.domain.piece.singlemove.King;
 import chess.domain.square.Square;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import java.util.HashMap;
+import java.util.Map;
 
 class BoardTest {
 
@@ -65,5 +71,43 @@ class BoardTest {
         assertThatThrownBy(() -> board.move(from, to))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("이동 경로에 장애물이 있습니다.");
+    }
+
+    @Test
+    void isKingDead() {
+        final Map<Square, Piece> rawBoard = Map.of(
+                Square.from("a1"), new King(Team.WHITE, Square.from("a1")),
+                Square.from("a2"), new King(Team.BLACK, Square.from("a2"))
+        );
+        final Board board = new Board(new HashMap<>(rawBoard));
+
+        board.move(Square.from("a1"), Square.from("a2"));
+        assertThat(board.isKingDead()).isTrue();
+    }
+
+    @Test
+    void getTeamWithAliveKing() {
+        final Map<Square, Piece> rawBoard = Map.of(
+                Square.from("a1"), new King(Team.WHITE, Square.from("a1")),
+                Square.from("a2"), new King(Team.BLACK, Square.from("a2"))
+        );
+        final Board board = new Board(new HashMap<>(rawBoard));
+
+        board.move(Square.from("a1"), Square.from("a2"));
+        assertThat(board.getTeamWithAliveKing()).isEqualTo(Team.WHITE);
+    }
+
+    @Test
+    void invalidGetTeamWhenNoKingExist() {
+        final Map<Square, Piece> rawBoard = Map.of(
+                Square.from("a1"), new Rook(Team.WHITE, Square.from("a1")),
+                Square.from("a2"), new Rook(Team.BLACK, Square.from("a2"))
+        );
+        final Board board = new Board(new HashMap<>(rawBoard));
+
+        board.move(Square.from("a1"), Square.from("a2"));
+        assertThatThrownBy(board::getTeamWithAliveKing)
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("보드에 킹이 존재하지 않습니다.");
     }
 }

@@ -34,4 +34,11 @@ class BishopTest {
 
         assertThat(newPiece.getSquare()).isEqualTo(to);
     }
+
+    @DisplayName("비숍에 킹인지 물어봤을 때 false를 반환한다.")
+    @Test
+    void isBishopKing() {
+        final Piece piece = new Bishop(Team.WHITE, Square.from("a1"));
+        assertThat(piece.isKing()).isFalse();
+    }
 }

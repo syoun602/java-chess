@@ -28,6 +28,14 @@ public class Game {
         validateTurn(from);
         board.move(from, to);
         this.turn = turn.reverse();
+        validateEnd();
+    }
+
+    public Result createResult() {
+        if (board.isKingDead()) {
+            return new Result(calculateByTeam(Team.BLACK), calculateByTeam(Team.WHITE), board.getTeamWithAliveKing());
+        }
+        return Result.byScore(calculateByTeam(Team.BLACK), calculateByTeam(Team.WHITE));
     }
 
     public void terminate() {
@@ -46,8 +54,10 @@ public class Game {
         }
     }
 
-    public Result createResult() {
-        return Result.byScore(calculateByTeam(Team.BLACK), calculateByTeam(Team.WHITE));
+    private void validateEnd() {
+        if (board.isKingDead()) {
+            turn = Team.NONE;
+        }
     }
 
     private Double calculateByTeam(final Team team) {

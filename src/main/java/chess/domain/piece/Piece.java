@@ -43,6 +43,10 @@ public abstract class Piece {
         return this.team == team;
     }
 
+    public boolean isKing() {
+        return false;
+    }
+
     private void validateMove(final Piece piece) {
         if (this.isSameTeam(piece)) {
             throw new IllegalArgumentException("같은 팀 위치로는 이동할 수 없습니다.");

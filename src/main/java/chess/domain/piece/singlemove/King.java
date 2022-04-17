@@ -27,4 +27,9 @@ public class King extends SingleMovePiece {
     public PieceType getPieceType() {
         return PieceType.KING;
     }
+
+    @Override
+    public boolean isKing() {
+        return true;
+    }
 }
